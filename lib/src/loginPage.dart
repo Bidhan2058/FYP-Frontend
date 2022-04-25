@@ -96,16 +96,16 @@ class _State extends State<LoginPage> {
                           filled: true),
                     ),
                   ),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Vehiclepage()));
-                    },
-                    textColor: Colors.black,
-                    child: Text('Forgot Password ?'),
-                  ),
+                  // FlatButton(
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => Vehiclepage()));
+                  //   },
+                  //   textColor: Colors.black,
+                  //   child: Text('Forgot Password ?'),
+                  // ),
                   Container(
                       height: 50,
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -136,6 +136,9 @@ class _State extends State<LoginPage> {
                                     session.set("name", value.name);
                                     session.set("token", value.token);
                                     session.set("id", value.id);
+                                    session.set("mail", value.email);
+                                    session.set("phone", value.phone);
+                                    session.set("fullname", value.fullname);
 
                                     Navigator.push(
                                         context,

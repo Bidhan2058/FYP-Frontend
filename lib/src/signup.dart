@@ -1,6 +1,8 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
 import 'package:flutter_login_signup/src/loginPage.dart';
 import 'package:flutter_login_signup/src/welcomePage.dart';
 import 'package:flutter_login_signup/models/registermodel.dart';
@@ -19,6 +21,8 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController confirmpasswordController = TextEditingController();
   TextEditingController contactController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
 
   RegisterModel regmodel = RegisterModel();
 
@@ -108,6 +112,58 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   Container(
                     padding: EdgeInsets.all(10),
+                    child: TextFormField(
+                      style: TextStyle(fontSize: 19),
+                      controller: usernameController,
+                      keyboardType: TextInputType.text,
+                      validator: (input) => !(input.length > 3)
+                          ? "Please provide valid username"
+                          : null,
+                      decoration: InputDecoration(
+                          errorStyle:
+                              TextStyle(fontSize: 16.0, color: Colors.black),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                              borderSide: BorderSide(color: Colors.white)),
+                          labelText: 'Username',
+                          labelStyle:
+                              TextStyle(fontSize: 19.0, color: Colors.black),
+                          fillColor: Color(0x00000000),
+                          filled: true),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    child: TextFormField(
+                      style: TextStyle(fontSize: 19),
+                      controller: addressController,
+                      keyboardType: TextInputType.text,
+                      validator: (input) => !(input.length > 3)
+                          ? "Please provide valid address"
+                          : null,
+                      decoration: InputDecoration(
+                          errorStyle:
+                              TextStyle(fontSize: 16.0, color: Colors.black),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                              borderSide: BorderSide(color: Colors.white)),
+                          labelText: 'Address',
+                          labelStyle:
+                              TextStyle(fontSize: 19.0, color: Colors.black),
+                          fillColor: Color(0x00000000),
+                          filled: true),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(10),
                     child: TextField(
                       style: TextStyle(fontSize: 19),
                       controller: contactController,
@@ -187,6 +243,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           onPressed: () {
                             validate();
+                            print(validate());
                             print(emailController.text);
                           })),
                   Container(
@@ -218,18 +275,20 @@ class _SignUpPageState extends State<SignUpPage> {
     regmodel = RegisterModel(
         mail: emailController.text,
         fullname: nameController.text,
-        password: passwordController.text,
-        passwordconfirm: confirmpasswordController.text,
+        password: passwordController.text.trim(),
+        passwordconfirm: confirmpasswordController.text.trim(),
+        username: usernameController.text.trim(),
+        address: addressController.text.trim(),
         contact: contactController.text);
-    var response = await http.post("http://10.0.2.2:6000/API/register",
+    var response = await http.post("http://10.0.2.2:8000/API/register",
         headers: {"Content-type": "application/json"},
         body: json.encode(regmodel.toJson()));
-    print(response.body);
+    var responseBody =response.body;
     if (response.statusCode == 200) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => WelcomePage()));
     } else {
-      print(response);
+      EasyLoading.showError(responseBody);
     }
   }
 
