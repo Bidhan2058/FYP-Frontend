@@ -111,31 +111,31 @@ class _EditProfileState extends State<EditProfile> {
                               borderSide: BorderSide(color: Colors.white))),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    child: TextFormField(
-                      style: TextStyle(fontSize: 19),
-                      controller: emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (input) =>
-                          !input.contains("@") ? "Email should be valid" : null,
-                      decoration: InputDecoration(
-                          errorStyle:
-                              TextStyle(fontSize: 16.0, color: Colors.black),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              borderSide: BorderSide(color: Colors.white)),
-                          labelText: 'Email',
-                          labelStyle:
-                              TextStyle(fontSize: 19.0, color: Colors.black),
-                          fillColor: Color(0x00000000),
-                          filled: true),
-                    ),
-                  ),
+                  // Container(
+                  //   padding: EdgeInsets.all(10),
+                  //   child: TextFormField(
+                  //     style: TextStyle(fontSize: 19),
+                  //     controller: emailController,
+                  //     keyboardType: TextInputType.emailAddress,
+                  //     validator: (input) =>
+                  //         !input.contains("@") ? "Email should be valid" : null,
+                  //     decoration: InputDecoration(
+                  //         errorStyle:
+                  //             TextStyle(fontSize: 16.0, color: Colors.black),
+                  //         enabledBorder: OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(Radius.circular(5)),
+                  //         ),
+                  //         focusedBorder: OutlineInputBorder(
+                  //             borderRadius:
+                  //                 BorderRadius.all(Radius.circular(5)),
+                  //             borderSide: BorderSide(color: Colors.white)),
+                  //         labelText: 'Email',
+                  //         labelStyle:
+                  //             TextStyle(fontSize: 19.0, color: Colors.black),
+                  //         fillColor: Color(0x00000000),
+                  //         filled: true),
+                  //   ),
+                  // ),
                   Container(
                     padding: EdgeInsets.all(10),
                     child: TextField(

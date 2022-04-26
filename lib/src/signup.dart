@@ -280,16 +280,21 @@ class _SignUpPageState extends State<SignUpPage> {
         username: usernameController.text.trim(),
         address: addressController.text.trim(),
         contact: contactController.text);
-    var response = await http.post("http://10.0.2.2:8000/API/register",
+  try{
+      var response = await http.post("http://10.0.2.2:8000/API/register",
         headers: {"Content-type": "application/json"},
         body: json.encode(regmodel.toJson()));
-    var responseBody =response.body;
-    if (response.statusCode == 200) {
-      Navigator.push(
+       if (response.statusCode == 200) {
+      
+         Navigator.push(
           context, MaterialPageRoute(builder: (context) => WelcomePage()));
-    } else {
-      EasyLoading.showError(responseBody);
+          EasyLoading.showSuccess("User Registered Successfully");
+          print(response.body);
+        } 
     }
+  catch(e){
+          EasyLoading.showError(e);
+        }
   }
 
   bool validate() {

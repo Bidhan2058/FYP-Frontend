@@ -251,10 +251,10 @@ class _AddVehiclePageState extends State<Vehiclepage> {
                   style: TextStyle(fontSize: 17.5),
                   controller: price,
                   keyboardType: TextInputType.number,
-                  validator: (input) => (input.isEmpty &&
-                          input.contains(new RegExp('[A-Z][a-z]')))
+                  validator: (input) => (input.isEmpty ||
+                          !input.contains(new RegExp(r'^[0-9]+$'))
                       ? "Plese provide valid vehicle price"
-                      : null,
+                      : null),
                   decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5))),
@@ -369,7 +369,6 @@ class _AddVehiclePageState extends State<Vehiclepage> {
                             if (value != null) {
                               if (value.success) {
                                 session.set("vehicleID", value.vehicleID);
-
                                 sendregdata();
                                 singleUpload();
                               } else {
